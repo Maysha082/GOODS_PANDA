@@ -1,9 +1,17 @@
 const chatbotConfig = window.GOODS_PANDA_CHATBOT || {};
 
+function readStoredToken() {
+    try {
+        return window.localStorage.getItem("goodsPandaHfToken") || "";
+    } catch (error) {
+        return "";
+    }
+}
+
 const apiConfig = {
     endpoint: chatbotConfig.endpoint || "https://router.huggingface.co/v1/chat/completions",
     model: chatbotConfig.model || "meta-llama/Llama-3.1-8B-Instruct:cerebras",
-    apiKey: chatbotConfig.apiKey || window.localStorage.getItem("goodsPandaHfToken") || ""
+    apiKey: chatbotConfig.apiKey || readStoredToken()
 };
 
 const productCatalog = [
